@@ -1,12 +1,12 @@
 Summary:	Minordomo - minimalistic mailing lise manager.
 Summary(pl):	Minordomo - minimalny menad¿er list pocztowych.
 Name:		minordomo
-Version:	0.7
+Version:	0.7.6.2
 Release:	1
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
-Source:		ftp://ftp.nodomainname.net/pub/%name/current/%name-%version.tar.gz
+Source:		ftp://ftp.ndn.net/pub/%name/old/%name-%version.tar.gz
 Requires:	perl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
