@@ -9,7 +9,7 @@ Source0:	ftp://ftp.ndn.net/pub/minorfish/old/%{name}-%{version}.tar.gz
 Requires:	perl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_webdir		/home/httpd
+%define		_webdir		/home/services/httpd
 
 %description
 Minordomo is a minimalist mailing list manager. It can be considered a
