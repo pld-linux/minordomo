@@ -4,10 +4,9 @@ Name:		minordomo
 Version:	0.7
 Release:	1
 License:	GPL
-Group:		System/Listserver
-Group(pl):	System/Serwery List Pocztowych
+Group:		Utilities/System
+Group(pl):	Narzêdzia/System
 Source:		ftp://ftp.nodomainname.net/pub/%name/current/%name-%version.tar.gz
-#Patch:		
 Requires:	perl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
