@@ -66,6 +66,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/minordomo.pl
 %config %{_sysconfdir}/minordomo.conf
 %attr(755,root,root) %{_webdir}/cgi-bin/minorweb.pl
-%dir /var/lib/minordomo
-%attr(-,mail,mail) /var/lib/minordomo/defaultmailinglist
-%attr(644, root,root) /var/lib/minordomo/defaultmailinglist/*
+%attr(644, mail,mail) /var/lib/minordomo/defaultmailinglist/*
