@@ -1,26 +1,28 @@
-Summary:	Minordomo - minimalistic mailing lise manager.
-Summary(pl):	Minordomo - minimalny menad¿er list pocztowych.
+Summary:	Minordomo - minimalistic mailing lise manager
+Summary(pl):	Minordomo - minimalny menad¿er list pocztowych
 Name:		minordomo
 Version:	0.7.6.2
-Release:	1
+Release:	2
 License:	GPL
-Group:		Utilities/System
-Group(pl):	Narzêdzia/System
-Source:		ftp://ftp.ndn.net/pub/minorfish/old/%name-%version.tar.gz
+Group:		Applications/System
+Group(de):	Applikationen/System
+Group(pl):	Aplikacje/System
+Source0:	ftp://ftp.ndn.net/pub/minorfish/old/%{name}-%{version}.tar.gz
 Requires:	perl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define	_prefix	/usr
-%define	_sysconfdir	/etc
-%define	_webdir	/home/httpd
+%define		_webdir		/home/httpd
 
 %description
+Minordomo is a minimalist mailing list manager. It can be considered a
+feature limited replacement of majordomo.
 
 %description -l pl
+Minordomo jest minimalnym menad¿erem list pocztowych. Mo¿e byæ uwa¿any
+za zamiennik majordomo o ograniczonych mo¿liwo¶ciach.
 
 %prep
 %setup -q
-%build
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -61,4 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/minordomo.pl
 %config %{_sysconfdir}/minordomo.conf
 %attr(755,root,root) %{_webdir}/cgi-bin/minorweb.pl
-%attr(644, mail,mail) /var/lib/minordomo/defaultmailinglist/*
+%dir /var/lib/minordomo
+%dir /var/lib/minordomo/defaultmailinglist
+%attr(644,mail,mail) /var/lib/minordomo/defaultmailinglist/*
