@@ -44,8 +44,6 @@ gzip -9nf README CHANGELOG
 if [ "`grep minordomo /etc/aliases`" = "" ]; then
 echo "#Minordomo mailing list manager" >>/etc/aliases
 echo -e "minordomo:	\042|/usr/sbin/minordimo.pl\042">>/etc/aliases
-fi
-if [ "`grep minordomo /etc/aliases`" = "" ]; then
 echo " " >>/etc/aliases
 echo "#Minordomo default mailing list " >>/etc/aliases
 echo -e "defaultmailinglist:	\042|/usr/sbin/minordimo.pl defaultmailinglist\042">>/etc/aliases
