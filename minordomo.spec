@@ -37,23 +37,23 @@ install minorweb.pl $RPM_BUILD_ROOT%{_webdir}/cgi-bin/
 gzip -9nf README CHANGELOG 
 
 %post
-if [ "`grep minordomo %{_sysconfdir}/aliases`" ="" ]; then
-echo "#Minordomo mailing list manager" >>%{_sysconfdir}/aliases
-echo "minordomo:	""|%{_sbindir}/minordimo.pl"">>%{_sysconfdir}/aliases
-done
+if [ "`grep minordomo /etc/aliases`" = "" ]; then
+echo "#Minordomo mailing list manager" >>/etc/aliases
+echo -e "minordomo:	\042|/usr/sbin/minordimo.pl\042">>/etc/aliases
+fi
 
 %postun
 if [ "`grep minordomo /etc/aliases`" != "" ]; then
 sed -e "s/minordomo/\#minordomo/" /etc/aliases >/tmp/.al
 mv -f /tmp/.al /etc/aliases
-done
+fi
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.bz2 CHANGELOG.bz2 
+%doc {README,CHANGELOG}.gz 
 %attr(755,root,root) %{_sbindir}/minordomo.pl
 %config %{_sysconfdir}/minordomo.conf
 %attr(755,root,root) %{_webdir}/cgi-bin/minorweb.pl
