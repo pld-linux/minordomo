@@ -2,7 +2,7 @@ Summary:	Minordomo - minimalistic mailing lise manager.
 Summary(pl):	Minordomo - minimalny menad¿er list pocztowych.
 Name:		minordomo
 Version:	0.7
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		System/Listserver
 Group(pl):	System/Serwery List Pocztowych
@@ -28,11 +28,15 @@ Buildroot:	/tmp/%{name}-%{version}-root
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_libdir},%{_webdir}/cgi-bin,%{_sysconfdir}}
-install -d $RPM_BUILD_ROOT/var/lib/minordomo
+install -d $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist
 
 install minordomo.pl $RPM_BUILD_ROOT%{_sbindir}
 install minordomo.conf.sample $RPM_BUILD_ROOT%{_sysconfdir}/minordomo.conf
 install minorweb.pl $RPM_BUILD_ROOT%{_webdir}/cgi-bin/
+
+install libdir/sample-list/config $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
+install libdir/sample-list/info $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
+install libdir/sample-list/footer $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
 
 gzip -9nf README CHANGELOG 
 
@@ -40,6 +44,11 @@ gzip -9nf README CHANGELOG
 if [ "`grep minordomo /etc/aliases`" = "" ]; then
 echo "#Minordomo mailing list manager" >>/etc/aliases
 echo -e "minordomo:	\042|/usr/sbin/minordimo.pl\042">>/etc/aliases
+fi
+if [ "`grep minordomo /etc/aliases`" = "" ]; then
+echo " " >>/etc/aliases
+echo "#Minordomo default mailing list " >>/etc/aliases
+echo -e "defaultmailinglist:	\042|/usr/sbin/minordimo.pl defaultmailinglist\042">>/etc/aliases
 fi
 
 %postun
@@ -57,3 +66,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_sbindir}/minordomo.pl
 %config %{_sysconfdir}/minordomo.conf
 %attr(755,root,root) %{_webdir}/cgi-bin/minorweb.pl
+%dir /var/lib/minordomo
+%attr(-,mail,mail) /var/lib/minordomo/defaultmailinglist
+%attr(644, root,root) /var/lib/minordomo/defaultmailinglist/*
