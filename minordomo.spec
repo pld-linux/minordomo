@@ -9,7 +9,7 @@ Group(pl):	System/Serwery List Pocztowych
 Source:		ftp://ftp.nodomainname.net/pub/%name/current/%name-%version.tar.gz
 #Patch:		
 Requires:	perl
-Buildroot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	_prefix	/usr
 %define	_sysconfdir	/etc
@@ -17,9 +17,7 @@ Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
 
-
 %description -l pl
-
 
 %prep
 %setup -q
