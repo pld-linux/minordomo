@@ -1,5 +1,5 @@
 Summary:	Minordomo - minimalistic mailing lise manager
-Summary(pl):	Minordomo - minimalny menad¿er list pocztowych
+Summary(pl):	Minordomo - minimalny zarz±dca list pocztowych
 Name:		minordomo
 Version:	0.7.6.2
 Release:	2
@@ -16,7 +16,7 @@ Minordomo is a minimalist mailing list manager. It can be considered a
 feature limited replacement of majordomo.
 
 %description -l pl
-Minordomo jest minimalnym menad¿erem list pocztowych. Mo¿e byæ uwa¿any
+Minordomo jest minimalnym zarz±dc± list pocztowych. Mo¿e byæ uwa¿any
 za zamiennik majordomo o ograniczonych mo¿liwo¶ciach.
 
 %prep
@@ -34,8 +34,6 @@ install minorweb.pl $RPM_BUILD_ROOT%{_webdir}/cgi-bin/
 install libdir/sample-list/config $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
 install libdir/sample-list/info $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
 install libdir/sample-list/footer $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
-
-gzip -9nf README CHANGELOG
 
 %post
 if [ "`grep minordomo /etc/aliases`" = "" ]; then
@@ -57,7 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {README,CHANGELOG}.gz
+%doc README CHANGELOG
 %attr(755,root,root) %{_sbindir}/minordomo.pl
 %config %{_sysconfdir}/minordomo.conf
 %attr(755,root,root) %{_webdir}/cgi-bin/minorweb.pl
