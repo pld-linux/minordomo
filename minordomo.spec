@@ -6,7 +6,7 @@ Release:	1
 License:	GPL
 Group:		Utilities/System
 Group(pl):	Narzêdzia/System
-Source:		ftp://ftp.ndn.net/pub/%name/old/%name-%version.tar.gz
+Source:		ftp://ftp.ndn.net/pub/minorfish/old/%name-%version.tar.gz
 Requires:	perl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
