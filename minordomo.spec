@@ -6,7 +6,11 @@ Release:	2
 License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.ndn.net/pub/minorfish/old/%{name}-%{version}.tar.gz
+PreReq:		smtpdaemon
 Requires:	perl
+Requires(post,postun):	grep
+Requires(postun):	fileutils
+Requires(postun):	sed
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_webdir		/home/services/httpd
@@ -35,23 +39,25 @@ install libdir/sample-list/config $RPM_BUILD_ROOT/var/lib/minordomo/defaultmaili
 install libdir/sample-list/info $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
 install libdir/sample-list/footer $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
-if [ "`grep minordomo /etc/aliases`" = "" ]; then
-echo "#Minordomo mailing list manager" >>/etc/aliases
-echo -e "minordomo:	\042|/usr/sbin/minordimo.pl\042">>/etc/aliases
-echo " " >>/etc/aliases
-echo "#Minordomo default mailing list " >>/etc/aliases
-echo -e "defaultmailinglist:	\042|/usr/sbin/minordimo.pl defaultmailinglist\042">>/etc/aliases
+if [ "`grep minordomo /etc/mail/aliases`" = "" ]; then
+	umask 022
+	echo "#Minordomo mailing list manager" >>/etc/mail/aliases
+	echo -e "minordomo:	\042|/usr/sbin/minordimo.pl\042">>/etc/mail/aliases
+	echo " " >>/etc/mail/aliases
+	echo "#Minordomo default mailing list " >>/etc/mail/aliases
+	echo -e "defaultmailinglist:	\042|/usr/sbin/minordimo.pl defaultmailinglist\042">>/etc/mail/aliases
 fi
 
 %postun
 if [ "`grep minordomo /etc/aliases`" != "" ]; then
-sed -e "s/minordomo/\#minordomo/" /etc/aliases >/tmp/.al
-mv -f /tmp/.al /etc/aliases
+	umask 022
+	sed -e "s/minordomo/\#minordomo/" /etc/mail/aliases >/etc/mail/aliases.rpmtmp
+	mv -f /etc/mail/aliases.rpmtmp /etc/mail/aliases
 fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
