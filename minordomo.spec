@@ -35,7 +35,7 @@ install libdir/sample-list/config $RPM_BUILD_ROOT/var/lib/minordomo/defaultmaili
 install libdir/sample-list/info $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
 install libdir/sample-list/footer $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
 
-gzip -9nf README CHANGELOG 
+gzip -9nf README CHANGELOG
 
 %post
 if [ "`grep minordomo /etc/aliases`" = "" ]; then
@@ -57,7 +57,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {README,CHANGELOG}.gz 
+%doc {README,CHANGELOG}.gz
 %attr(755,root,root) %{_sbindir}/minordomo.pl
 %config %{_sysconfdir}/minordomo.conf
 %attr(755,root,root) %{_webdir}/cgi-bin/minorweb.pl
