@@ -1,0 +1,3 @@
+- umask in scripts, added Requires()
+- fixed insecure /tmp usage in %postun
+- changed /etc/aliases to /etc/mail/aliases (as in postfix,sendmail,exim)
