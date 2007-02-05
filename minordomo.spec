@@ -1,4 +1,6 @@
-Summary:	Minordomo - minimalistic mailing lise manager
+# TODO
+# - webapps
+Summary:	Minordomo - minimalistic mailing list manager
 Summary(pl):	Minordomo - minimalny zarz±dca list pocztowych
 Name:		minordomo
 Version:	0.7.6.2
@@ -7,11 +9,11 @@ License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.ndn.net/pub/minorfish/old/%{name}-%{version}.tar.gz
 # Source0-md5:	395bf2164c89e4e016d4582250fb5bfc
-Requires:	smtpdaemon
-Requires:	perl-base
 Requires(post,postun):	grep
 Requires(postun):	fileutils
-Requires(postun):	sed
+Requires(postun):	sed >= 4.0
+Requires:	perl-base
+Requires:	smtpdaemon
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_webdir		/home/services/httpd
@@ -36,9 +38,9 @@ install minordomo.pl $RPM_BUILD_ROOT%{_sbindir}
 install minordomo.conf.sample $RPM_BUILD_ROOT%{_sysconfdir}/minordomo.conf
 install minorweb.pl $RPM_BUILD_ROOT%{_webdir}/cgi-bin/
 
-install sample-list/config $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
-install sample-list/info $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
-install sample-list/footer $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist/
+install sample-list/config $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist
+install sample-list/info $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist
+install sample-list/footer $RPM_BUILD_ROOT/var/lib/minordomo/defaultmailinglist
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -46,18 +48,17 @@ rm -rf $RPM_BUILD_ROOT
 %post
 if [ "`grep minordomo /etc/mail/aliases`" = "" ]; then
 	umask 022
-	echo "#Minordomo mailing list manager" >>/etc/mail/aliases
-	echo -e "minordomo:	\042|/usr/sbin/minordimo.pl\042">>/etc/mail/aliases
-	echo " " >>/etc/mail/aliases
-	echo "#Minordomo default mailing list " >>/etc/mail/aliases
-	echo -e "defaultmailinglist:	\042|/usr/sbin/minordimo.pl defaultmailinglist\042">>/etc/mail/aliases
+	echo "#Minordomo mailing list manager" >> /etc/mail/aliases
+	echo -e "minordomo:	\042|/usr/sbin/minordimo.pl\042">> /etc/mail/aliases
+	echo "" >> /etc/mail/aliases
+	echo "#Minordomo default mailing list " >> /etc/mail/aliases
+	echo -e "defaultmailinglist:	\042|/usr/sbin/minordimo.pl defaultmailinglist\042" >> /etc/mail/aliases
 fi
 
 %postun
 if [ "`grep minordomo /etc/aliases`" != "" ]; then
 	umask 022
-	sed -e "s/minordomo/\#minordomo/" /etc/mail/aliases >/etc/mail/aliases.rpmtmp
-	mv -f /etc/mail/aliases.rpmtmp /etc/mail/aliases
+	sed -i -e "s/minordomo/\#minordomo/" /etc/mail/aliases
 fi
 
 %files
