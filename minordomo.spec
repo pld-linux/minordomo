@@ -7,7 +7,7 @@ License:	GPL
 Group:		Applications/System
 Source0:	ftp://ftp.ndn.net/pub/minorfish/old/%{name}-%{version}.tar.gz
 # Source0-md5:	395bf2164c89e4e016d4582250fb5bfc
-PreReq:		smtpdaemon
+Requires:	smtpdaemon
 Requires:	perl-base
 Requires(post,postun):	grep
 Requires(postun):	fileutils
