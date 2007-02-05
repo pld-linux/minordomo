@@ -1,0 +1,4 @@
+- R: s/perl/perl-base/
+- fixed %install
+- removed CHANGELOG from %doc, and added NEWS
+- noreplace for %config, verify()
