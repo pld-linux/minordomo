@@ -1,7 +1,7 @@
 # TODO
 # - webapps
 Summary:	Minordomo - minimalistic mailing list manager
-Summary(pl):	Minordomo - minimalny zarz±dca list pocztowych
+Summary(pl.UTF-8):   Minordomo - minimalny zarzÄ…dca list pocztowych
 Name:		minordomo
 Version:	0.7.6.2
 Release:	2
@@ -22,9 +22,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Minordomo is a minimalist mailing list manager. It can be considered a
 feature limited replacement of majordomo.
 
-%description -l pl
-Minordomo jest minimalnym zarz±dc± list pocztowych. Mo¿e byæ uwa¿any
-za zamiennik majordomo o ograniczonych mo¿liwo¶ciach.
+%description -l pl.UTF-8
+Minordomo jest minimalnym zarzÄ…dcÄ… list pocztowych. MoÅ¼e byÄ‡ uwaÅ¼any
+za zamiennik majordomo o ograniczonych moÅ¼liwoÅ›ciach.
 
 %prep
 %setup -q
